@@ -1,5 +1,5 @@
 <template>
-  <div class="pl-3 inline-block no-underline hover:text-black">
+  <RouterLink to="/carrinho" class="pl-3 inline-block no-underline hover:text-black">
     <div :class="$store.getters['shoppingCart/items'].length ? 'ml-4 mb-8 absolute rounded-full w-3 h-3 bg-emerald-500 text-white' : ''"></div>
 
     <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -9,5 +9,5 @@
       <circle cx="10.5" cy="18.5" r="1.5" />
       <circle cx="17.5" cy="18.5" r="1.5" />
     </svg>
-  </div>
+  </RouterLink>
 </template>
