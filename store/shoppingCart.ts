@@ -21,10 +21,6 @@ export const getters: GetterTree<RootState, RootState> = {
 
 export const mutations: MutationTree<RootState> = {
   ADD_ITEM(state: RootState, item: CartItem) {
-    if (state.all.find(i => i.product._id === item.product._id)) {
-      return
-    }
-
     state.all.push(item)
   },
   REMOVE_ITEM(state: RootState, item: CartItem) {
@@ -44,7 +40,11 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  addProduct({ commit }, product: Product) {
+  addProduct({ commit, state }, product: Product) {
+    if (state.all.find(i => i.product._id === product._id)) {
+      return
+    }
+
     commit('ADD_ITEM', {
       product,
       quantity: 1,
@@ -57,6 +57,17 @@ export const actions: ActionTree<RootState, RootState> = {
     })
   },
   setQuantity({ commit }, { product, quantity }: { product: Product; quantity: number }) {
+    if (product.quantity < quantity) {
+      return;
+    }
+    if (quantity === 0) {
+      commit('REMOVE_ITEM', {
+        product,
+        quantity: 0,
+      })
+      return
+    }
+
     commit('SET_QUANTITY', {
       item: {
         product,

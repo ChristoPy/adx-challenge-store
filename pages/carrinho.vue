@@ -1,0 +1,21 @@
+<template>
+  <section class="py-8 mt-12 px-4">
+    <div class="container mx-auto max-w-5xl">
+      <h1 class="text-black text-2xl my-4 py-8">Carrinho</h1>
+
+      <ShoppingCartItem v-for="item of $store.getters['shoppingCart/items']" :item="item" :key="item.product._id" />
+      <ShoppingCartTotal />
+    </div>
+  </section>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+  name: "ShoppingCartPage",
+  head: {
+    title: "Carrinho",
+  },
+})
+</script>
