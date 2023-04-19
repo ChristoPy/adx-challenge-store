@@ -8,8 +8,8 @@ defineProps<{
 <template>
   <img
     class="object-cover w-full hover:shadow-lg rounded-md"
-    :src="image || 'https://via.placeholder.com/336x460.png?text=No+Image'"
+    :src="image || 'https://via.placeholder.com/336x336.png?text=Sem+imagem'"
     :alt="name"
-    style="maxheight: 336px"
+    style="max-height: 336px;"
   />
 </template>
