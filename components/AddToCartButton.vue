@@ -19,7 +19,7 @@ export default Vue.extend({
 </script>
 
 <template>
-  <Button full text="Por no Carrinho" :on-click="onclick">
+  <GenericButton full text="Por no Carrinho" :on-click="onclick">
     <svg
       v-if="!$store.getters['shoppingCart/isProductInCart'](product)"
       fill="none"
@@ -52,5 +52,5 @@ export default Vue.extend({
         d="M5 13l4 4L19 7"
       ></path>
     </svg>
-  </Button>
+  </GenericButton>
 </template>
