@@ -7,5 +7,5 @@ const props = defineProps<{
 
 <template>
   <img class="object-cover w-full hover:shadow-lg rounded-md"
-    :src="image || 'https://via.placeholder.com/336x460.png?text=No+Image'" :alt="name" style="maxHeight: 336px;" />
+    :src="image || 'https://via.placeholder.com/336x460.png?text=Sem+imagem'" :alt="name" style="maxHeight: 336px;" />
 </template>
