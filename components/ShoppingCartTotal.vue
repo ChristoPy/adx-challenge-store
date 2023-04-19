@@ -4,6 +4,6 @@ import { formatMoney } from '~/utils/money';
 
 <template>
   <div class="mt-6">
-    <p class="text-2xl font-bold">Total: {{formatMoney($store.getters['shoppingCart/total'])}}</p>
+    <p class="text-2xl text-gray-900">Total: {{formatMoney($store.getters['shoppingCart/total'])}}</p>
   </div>
 </template>
