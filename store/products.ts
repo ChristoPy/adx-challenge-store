@@ -24,7 +24,6 @@ export const mutations: MutationTree<RootState> = {
 export const actions: ActionTree<RootState, RootState> = {
   async getProducts({ commit }) {
     const products = await this.$axios.$get('/products')
-    console.log(products)
     commit('SET_PRODUCTS', products)
   }
 }
