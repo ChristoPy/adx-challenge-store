@@ -6,17 +6,23 @@ interface State {
   total: number
 }
 
-export const state = () => ({
-  all: [],
-  total: 0,
-}) as State
+export const state = () =>
+  ({
+    all: [],
+    total: 0,
+  } as State)
 
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
-  items: state => state.all.filter(item => item.quantity > 0),
-  total: state => state.all.reduce((total, item) => total + item.product.price * item.quantity, 0),
-  isProductInCart: state => (product: Product) => state.all.some(item => item.product._id === product._id),
+  items: (state) => state.all.filter((item) => item.quantity > 0),
+  total: (state) =>
+    state.all.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    ),
+  isProductInCart: (state) => (product: Product) =>
+    state.all.some((item) => item.product._id === product._id),
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -24,14 +30,17 @@ export const mutations: MutationTree<RootState> = {
     state.all.push(item)
   },
   REMOVE_ITEM(state: RootState, item: CartItem) {
-    const index = state.all.findIndex(i => i.product._id === item.product._id)
+    const index = state.all.findIndex((i) => i.product._id === item.product._id)
 
     if (index > -1) {
       state.all.splice(index, 1)
     }
   },
-  SET_QUANTITY(state: RootState, { item, quantity }: { item: CartItem; quantity: number }) {
-    const index = state.all.findIndex(i => i.product._id === item.product._id)
+  SET_QUANTITY(
+    state: RootState,
+    { item, quantity }: { item: CartItem; quantity: number }
+  ) {
+    const index = state.all.findIndex((i) => i.product._id === item.product._id)
 
     if (index > -1) {
       state.all[index].quantity = quantity
@@ -41,7 +50,7 @@ export const mutations: MutationTree<RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
   addProduct({ commit, state }, product: Product) {
-    if (state.all.find(i => i.product._id === product._id)) {
+    if (state.all.find((i) => i.product._id === product._id)) {
       return
     }
 
@@ -56,9 +65,12 @@ export const actions: ActionTree<RootState, RootState> = {
       quantity: 0,
     })
   },
-  setQuantity({ commit }, { product, quantity }: { product: Product; quantity: number }) {
+  setQuantity(
+    { commit },
+    { product, quantity }: { product: Product; quantity: number }
+  ) {
     if (product.quantity < quantity) {
-      return;
+      return
     }
     if (quantity === 0) {
       commit('REMOVE_ITEM', {

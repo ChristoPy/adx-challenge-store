@@ -1,6 +1,12 @@
 <template>
-  <section class="container mx-auto flex items-center flex-wrap mt-12 pt-8 pb-12">
-    <ProductCard v-for="product of $store.getters['products/products']" :product="product" :key="product._id" />
+  <section
+    class="container mx-auto flex items-center flex-wrap mt-12 pt-8 pb-12"
+  >
+    <ProductCard
+      v-for="product of $store.getters['products/products']"
+      :key="product._id"
+      :product="product"
+    />
   </section>
 </template>
 
@@ -8,12 +14,12 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: "IndexPage",
+  name: 'IndexPage',
   head: {
-    title: "Loja",
+    title: 'Loja',
   },
   created() {
-    this.$store.dispatch("products/getProducts");
+    this.$store.dispatch('products/getProducts')
   },
 })
 </script>
