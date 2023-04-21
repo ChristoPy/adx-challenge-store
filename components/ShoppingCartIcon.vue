@@ -4,11 +4,8 @@
     class="pl-3 inline-block no-underline hover:text-black"
   >
     <div
-      :class="
-        $store.getters['shoppingCart/items'].length
-          ? 'ml-4 mb-8 absolute rounded-full w-3 h-3 bg-emerald-500 text-white'
-          : ''
-      "
+      v-show="$store.getters['shoppingCart/items'].length"
+      class="ml-4 mb-8 absolute rounded-full w-3 h-3 bg-emerald-500 text-white"
     ></div>
 
     <svg

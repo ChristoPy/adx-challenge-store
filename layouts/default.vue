@@ -1,5 +1,12 @@
-<script setup lang="ts">
-import PageHeader from '~/components/PageHeader.vue'
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+  name: 'DefaultLayout',
+  created() {
+    this.$store.dispatch('shoppingCart/getCart')
+  },
+})
 </script>
 
 <template>

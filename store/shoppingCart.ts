@@ -1,16 +1,21 @@
+import { set } from 'vue'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { CartItem, Product } from '~/types'
 
 interface State {
   all: CartItem[]
-  total: number
 }
 
 export const state = () =>
   ({
     all: [],
-    total: 0,
   } as State)
+
+function maybeSaveState(state: State) {
+  if (process.client) {
+    localStorage.setItem('cart', JSON.stringify(state.all))
+  }
+}
 
 export type RootState = ReturnType<typeof state>
 
@@ -26,6 +31,9 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const mutations: MutationTree<RootState> = {
+  SET_CART(state: RootState, cart: CartItem[]) {
+    set(state, 'all', cart)
+  },
   ADD_ITEM(state: RootState, item: CartItem) {
     state.all.push(item)
   },
@@ -49,6 +57,9 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
+  setCart({ commit }, cart: CartItem[]) {
+    commit('SET_CART', cart)
+  },
   addProduct({ commit, state }, product: Product) {
     if (state.all.find((i) => i.product._id === product._id)) {
       return
@@ -58,15 +69,10 @@ export const actions: ActionTree<RootState, RootState> = {
       product,
       quantity: 1,
     })
-  },
-  removeProduct({ commit }, product: Product) {
-    commit('REMOVE_ITEM', {
-      product,
-      quantity: 0,
-    })
+    maybeSaveState(state)
   },
   setQuantity(
-    { commit },
+    { commit, state },
     { product, quantity }: { product: Product; quantity: number }
   ) {
     if (product.quantity < quantity) {
@@ -77,6 +83,7 @@ export const actions: ActionTree<RootState, RootState> = {
         product,
         quantity: 0,
       })
+      maybeSaveState(state)
       return
     }
 
@@ -87,5 +94,14 @@ export const actions: ActionTree<RootState, RootState> = {
       },
       quantity,
     })
+    maybeSaveState(state)
+  },
+  getCart({ commit }) {
+    if (process.client) {
+      const cart = localStorage.getItem('cart')
+      if (cart) {
+        commit('SET_CART', JSON.parse(cart))
+      }
+    }
   },
 }
