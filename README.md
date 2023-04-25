@@ -39,3 +39,7 @@ Adjust the quantity of items in the shopping cart by clicking the "-" button or 
 #### Remove a product from the cart
 
 Remove a product from the shopping cart by clicking the "-" until the quantity reaches zero.
+
+#### Persistency
+
+The shopping cart is persisted in the browser's local storage, so it will be available even if the user closes the browser.
