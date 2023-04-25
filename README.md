@@ -3,6 +3,8 @@
 This project is a small e-commerce system with a store front-end where visitors can view products and add them to a shopping cart.  
 The store is developed using the Vue.js and Nuxt frameworks.
 
+And can be found here: [adx-challenge-store.vercel.app/](adx-challenge-store.vercel.app/).
+
 ## Installation
 
 1. Clone the repository
@@ -32,8 +34,8 @@ View the contents of the shopping cart by clicking the "Cart" button in the top 
 
 #### Adjust the quantity of items in the cart
 
-Adjust the quantity of items in the shopping cart by changing the number in the "Quantity" field next to the product.
+Adjust the quantity of items in the shopping cart by clicking the "-" button or the "+" button on the item listed on Shopping Cart.
 
 #### Remove a product from the cart
 
-Remove a product from the shopping cart by clicking the "Remove" button next to the product.
+Remove a product from the shopping cart by clicking the "-" until the quantity reaches zero.
